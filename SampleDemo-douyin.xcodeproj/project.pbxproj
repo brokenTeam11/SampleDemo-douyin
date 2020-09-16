@@ -14,9 +14,33 @@
 		C34551FD2512739800F2C7F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C34551FC2512739800F2C7F2 /* Assets.xcassets */; };
 		C34552002512739800F2C7F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C34551FE2512739800F2C7F2 /* LaunchScreen.storyboard */; };
 		C34552032512739800F2C7F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C34552022512739800F2C7F2 /* main.m */; };
+		C3455211251289FE00F2C7F2 /* comments.json in Resources */ = {isa = PBXBuildFile; fileRef = C345520A251289FD00F2C7F2 /* comments.json */; };
+		C3455212251289FE00F2C7F2 /* Emoticons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C345520B251289FD00F2C7F2 /* Emoticons.bundle */; };
+		C3455213251289FE00F2C7F2 /* favorites.json in Resources */ = {isa = PBXBuildFile; fileRef = C345520C251289FD00F2C7F2 /* favorites.json */; };
+		C3455214251289FE00F2C7F2 /* awemes.json in Resources */ = {isa = PBXBuildFile; fileRef = C345520D251289FE00F2C7F2 /* awemes.json */; };
+		C3455215251289FE00F2C7F2 /* groupchats.json in Resources */ = {isa = PBXBuildFile; fileRef = C345520E251289FE00F2C7F2 /* groupchats.json */; };
+		C3455216251289FE00F2C7F2 /* emotion.json in Resources */ = {isa = PBXBuildFile; fileRef = C345520F251289FE00F2C7F2 /* emotion.json */; };
+		C3455217251289FE00F2C7F2 /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = C3455210251289FE00F2C7F2 /* user.json */; };
+		C345521D25128EBC00F2C7F2 /* NetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C345521C25128EBC00F2C7F2 /* NetworkHelper.m */; };
+		C345522025128F1B00F2C7F2 /* WebSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C345521F25128F1B00F2C7F2 /* WebSocketManager.m */; };
+		C345522325128F4E00F2C7F2 /* WebCacheHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C345522225128F4E00F2C7F2 /* WebCacheHelper.m */; };
+		C345522625128F6C00F2C7F2 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C345522525128F6C00F2C7F2 /* BaseRequest.m */; };
+		C34552292512905300F2C7F2 /* VisitorRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C34552282512905300F2C7F2 /* VisitorRequest.m */; };
+		C345522C251290EF00F2C7F2 /* UserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C345522B251290EF00F2C7F2 /* UserRequest.m */; };
+		C345522F2512915500F2C7F2 /* AwemeListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C345522E2512915500F2C7F2 /* AwemeListRequest.m */; };
+		C3455232251291EF00F2C7F2 /* PostGroupChatTextRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C3455231251291EF00F2C7F2 /* PostGroupChatTextRequest.m */; };
+		C34552352512924C00F2C7F2 /* PostGroupChatImageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C34552342512924C00F2C7F2 /* PostGroupChatImageRequest.m */; };
+		C34552382512928F00F2C7F2 /* DeleteGroupChatRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C34552372512928F00F2C7F2 /* DeleteGroupChatRequest.m */; };
+		C345523B251292E900F2C7F2 /* GroupChatListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C345523A251292E900F2C7F2 /* GroupChatListRequest.m */; };
+		C345523E251293AA00F2C7F2 /* CommentListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C345523D251293AA00F2C7F2 /* CommentListRequest.m */; };
+		C34552412512949300F2C7F2 /* PostCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C34552402512949300F2C7F2 /* PostCommentRequest.m */; };
+		C3455244251294F600F2C7F2 /* DeleteCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C3455243251294F600F2C7F2 /* DeleteCommentRequest.m */; };
+		FB6E017BB91BFB10D33A06A5 /* libPods-SampleDemo-douyin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065D35A858BE460423118ADC /* libPods-SampleDemo-douyin.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		065D35A858BE460423118ADC /* libPods-SampleDemo-douyin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SampleDemo-douyin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B8A1824CEA46569F0F1778B /* Pods-SampleDemo-douyin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleDemo-douyin.release.xcconfig"; path = "Target Support Files/Pods-SampleDemo-douyin/Pods-SampleDemo-douyin.release.xcconfig"; sourceTree = "<group>"; };
 		C34551ED2512739300F2C7F2 /* SampleDemo-douyin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SampleDemo-douyin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C34551F02512739300F2C7F2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C34551F12512739300F2C7F2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -29,6 +53,42 @@
 		C34551FF2512739800F2C7F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C34552012512739800F2C7F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C34552022512739800F2C7F2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C345520A251289FD00F2C7F2 /* comments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = comments.json; sourceTree = "<group>"; };
+		C345520B251289FD00F2C7F2 /* Emoticons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Emoticons.bundle; sourceTree = "<group>"; };
+		C345520C251289FD00F2C7F2 /* favorites.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = favorites.json; sourceTree = "<group>"; };
+		C345520D251289FE00F2C7F2 /* awemes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awemes.json; sourceTree = "<group>"; };
+		C345520E251289FE00F2C7F2 /* groupchats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = groupchats.json; sourceTree = "<group>"; };
+		C345520F251289FE00F2C7F2 /* emotion.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emotion.json; sourceTree = "<group>"; };
+		C3455210251289FE00F2C7F2 /* user.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = user.json; sourceTree = "<group>"; };
+		C345521B25128EBC00F2C7F2 /* NetworkHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkHelper.h; sourceTree = "<group>"; };
+		C345521C25128EBC00F2C7F2 /* NetworkHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkHelper.m; sourceTree = "<group>"; };
+		C345521E25128F1B00F2C7F2 /* WebSocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebSocketManager.h; sourceTree = "<group>"; };
+		C345521F25128F1B00F2C7F2 /* WebSocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebSocketManager.m; sourceTree = "<group>"; };
+		C345522125128F4E00F2C7F2 /* WebCacheHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebCacheHelper.h; sourceTree = "<group>"; };
+		C345522225128F4E00F2C7F2 /* WebCacheHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebCacheHelper.m; sourceTree = "<group>"; };
+		C345522425128F6C00F2C7F2 /* BaseRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
+		C345522525128F6C00F2C7F2 /* BaseRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
+		C34552272512905300F2C7F2 /* VisitorRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisitorRequest.h; sourceTree = "<group>"; };
+		C34552282512905300F2C7F2 /* VisitorRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisitorRequest.m; sourceTree = "<group>"; };
+		C345522A251290EF00F2C7F2 /* UserRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserRequest.h; sourceTree = "<group>"; };
+		C345522B251290EF00F2C7F2 /* UserRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserRequest.m; sourceTree = "<group>"; };
+		C345522D2512915500F2C7F2 /* AwemeListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AwemeListRequest.h; sourceTree = "<group>"; };
+		C345522E2512915500F2C7F2 /* AwemeListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AwemeListRequest.m; sourceTree = "<group>"; };
+		C3455230251291EF00F2C7F2 /* PostGroupChatTextRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostGroupChatTextRequest.h; sourceTree = "<group>"; };
+		C3455231251291EF00F2C7F2 /* PostGroupChatTextRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostGroupChatTextRequest.m; sourceTree = "<group>"; };
+		C34552332512924C00F2C7F2 /* PostGroupChatImageRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostGroupChatImageRequest.h; sourceTree = "<group>"; };
+		C34552342512924C00F2C7F2 /* PostGroupChatImageRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostGroupChatImageRequest.m; sourceTree = "<group>"; };
+		C34552362512928F00F2C7F2 /* DeleteGroupChatRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeleteGroupChatRequest.h; sourceTree = "<group>"; };
+		C34552372512928F00F2C7F2 /* DeleteGroupChatRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeleteGroupChatRequest.m; sourceTree = "<group>"; };
+		C3455239251292E900F2C7F2 /* GroupChatListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupChatListRequest.h; sourceTree = "<group>"; };
+		C345523A251292E900F2C7F2 /* GroupChatListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupChatListRequest.m; sourceTree = "<group>"; };
+		C345523C251293AA00F2C7F2 /* CommentListRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentListRequest.h; sourceTree = "<group>"; };
+		C345523D251293AA00F2C7F2 /* CommentListRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentListRequest.m; sourceTree = "<group>"; };
+		C345523F2512949300F2C7F2 /* PostCommentRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCommentRequest.h; sourceTree = "<group>"; };
+		C34552402512949300F2C7F2 /* PostCommentRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCommentRequest.m; sourceTree = "<group>"; };
+		C3455242251294F600F2C7F2 /* DeleteCommentRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeleteCommentRequest.h; sourceTree = "<group>"; };
+		C3455243251294F600F2C7F2 /* DeleteCommentRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeleteCommentRequest.m; sourceTree = "<group>"; };
+		CFE4056C41AE1DA07F23B099 /* Pods-SampleDemo-douyin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleDemo-douyin.debug.xcconfig"; path = "Target Support Files/Pods-SampleDemo-douyin/Pods-SampleDemo-douyin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,17 +96,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB6E017BB91BFB10D33A06A5 /* libPods-SampleDemo-douyin.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B0859AE808D84323AC80CB4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				065D35A858BE460423118ADC /* libPods-SampleDemo-douyin.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3F3A4D35D41D7700F4E2E46A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CFE4056C41AE1DA07F23B099 /* Pods-SampleDemo-douyin.debug.xcconfig */,
+				8B8A1824CEA46569F0F1778B /* Pods-SampleDemo-douyin.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		C34551E42512739300F2C7F2 = {
 			isa = PBXGroup;
 			children = (
 				C34551EF2512739300F2C7F2 /* SampleDemo-douyin */,
 				C34551EE2512739300F2C7F2 /* Products */,
+				3F3A4D35D41D7700F4E2E46A /* Pods */,
+				0B0859AE808D84323AC80CB4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +141,8 @@
 		C34551EF2512739300F2C7F2 /* SampleDemo-douyin */ = {
 			isa = PBXGroup;
 			children = (
+				C345521825128E4600F2C7F2 /* Network */,
+				C34552092512899200F2C7F2 /* Resource */,
 				C34551F02512739300F2C7F2 /* AppDelegate.h */,
 				C34551F12512739300F2C7F2 /* AppDelegate.m */,
 				C34551F32512739300F2C7F2 /* SceneDelegate.h */,
@@ -68,12 +150,77 @@
 				C34551F62512739300F2C7F2 /* ViewController.h */,
 				C34551F72512739300F2C7F2 /* ViewController.m */,
 				C34551F92512739300F2C7F2 /* Main.storyboard */,
-				C34551FC2512739800F2C7F2 /* Assets.xcassets */,
 				C34551FE2512739800F2C7F2 /* LaunchScreen.storyboard */,
 				C34552012512739800F2C7F2 /* Info.plist */,
 				C34552022512739800F2C7F2 /* main.m */,
 			);
 			path = "SampleDemo-douyin";
+			sourceTree = "<group>";
+		};
+		C34552092512899200F2C7F2 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				C345520D251289FE00F2C7F2 /* awemes.json */,
+				C345520A251289FD00F2C7F2 /* comments.json */,
+				C345520B251289FD00F2C7F2 /* Emoticons.bundle */,
+				C345520F251289FE00F2C7F2 /* emotion.json */,
+				C345520C251289FD00F2C7F2 /* favorites.json */,
+				C345520E251289FE00F2C7F2 /* groupchats.json */,
+				C3455210251289FE00F2C7F2 /* user.json */,
+				C34551FC2512739800F2C7F2 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		C345521825128E4600F2C7F2 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C345521A25128E7B00F2C7F2 /* HttpResponse */,
+				C345521925128E6B00F2C7F2 /* HttpRequest */,
+				C345521B25128EBC00F2C7F2 /* NetworkHelper.h */,
+				C345521C25128EBC00F2C7F2 /* NetworkHelper.m */,
+				C345521E25128F1B00F2C7F2 /* WebSocketManager.h */,
+				C345521F25128F1B00F2C7F2 /* WebSocketManager.m */,
+				C345522125128F4E00F2C7F2 /* WebCacheHelper.h */,
+				C345522225128F4E00F2C7F2 /* WebCacheHelper.m */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		C345521925128E6B00F2C7F2 /* HttpRequest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HttpRequest;
+			sourceTree = "<group>";
+		};
+		C345521A25128E7B00F2C7F2 /* HttpResponse */ = {
+			isa = PBXGroup;
+			children = (
+				C345522425128F6C00F2C7F2 /* BaseRequest.h */,
+				C345522525128F6C00F2C7F2 /* BaseRequest.m */,
+				C34552272512905300F2C7F2 /* VisitorRequest.h */,
+				C34552282512905300F2C7F2 /* VisitorRequest.m */,
+				C345522A251290EF00F2C7F2 /* UserRequest.h */,
+				C345522B251290EF00F2C7F2 /* UserRequest.m */,
+				C345522D2512915500F2C7F2 /* AwemeListRequest.h */,
+				C345522E2512915500F2C7F2 /* AwemeListRequest.m */,
+				C3455230251291EF00F2C7F2 /* PostGroupChatTextRequest.h */,
+				C3455231251291EF00F2C7F2 /* PostGroupChatTextRequest.m */,
+				C34552332512924C00F2C7F2 /* PostGroupChatImageRequest.h */,
+				C34552342512924C00F2C7F2 /* PostGroupChatImageRequest.m */,
+				C34552362512928F00F2C7F2 /* DeleteGroupChatRequest.h */,
+				C34552372512928F00F2C7F2 /* DeleteGroupChatRequest.m */,
+				C3455239251292E900F2C7F2 /* GroupChatListRequest.h */,
+				C345523A251292E900F2C7F2 /* GroupChatListRequest.m */,
+				C345523C251293AA00F2C7F2 /* CommentListRequest.h */,
+				C345523D251293AA00F2C7F2 /* CommentListRequest.m */,
+				C345523F2512949300F2C7F2 /* PostCommentRequest.h */,
+				C34552402512949300F2C7F2 /* PostCommentRequest.m */,
+				C3455242251294F600F2C7F2 /* DeleteCommentRequest.h */,
+				C3455243251294F600F2C7F2 /* DeleteCommentRequest.m */,
+			);
+			path = HttpResponse;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +230,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C34552062512739800F2C7F2 /* Build configuration list for PBXNativeTarget "SampleDemo-douyin" */;
 			buildPhases = (
+				A4F0B076CD2ABBE474A35008 /* [CP] Check Pods Manifest.lock */,
 				C34551E92512739300F2C7F2 /* Sources */,
 				C34551EA2512739300F2C7F2 /* Frameworks */,
 				C34551EB2512739300F2C7F2 /* Resources */,
@@ -136,20 +284,66 @@
 				C34552002512739800F2C7F2 /* LaunchScreen.storyboard in Resources */,
 				C34551FD2512739800F2C7F2 /* Assets.xcassets in Resources */,
 				C34551FB2512739300F2C7F2 /* Main.storyboard in Resources */,
+				C3455211251289FE00F2C7F2 /* comments.json in Resources */,
+				C3455217251289FE00F2C7F2 /* user.json in Resources */,
+				C3455214251289FE00F2C7F2 /* awemes.json in Resources */,
+				C3455212251289FE00F2C7F2 /* Emoticons.bundle in Resources */,
+				C3455213251289FE00F2C7F2 /* favorites.json in Resources */,
+				C3455216251289FE00F2C7F2 /* emotion.json in Resources */,
+				C3455215251289FE00F2C7F2 /* groupchats.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A4F0B076CD2ABBE474A35008 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SampleDemo-douyin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C34551E92512739300F2C7F2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C345522C251290EF00F2C7F2 /* UserRequest.m in Sources */,
 				C34551F82512739300F2C7F2 /* ViewController.m in Sources */,
+				C34552352512924C00F2C7F2 /* PostGroupChatImageRequest.m in Sources */,
 				C34551F22512739300F2C7F2 /* AppDelegate.m in Sources */,
 				C34552032512739800F2C7F2 /* main.m in Sources */,
+				C345522325128F4E00F2C7F2 /* WebCacheHelper.m in Sources */,
+				C345522625128F6C00F2C7F2 /* BaseRequest.m in Sources */,
+				C34552412512949300F2C7F2 /* PostCommentRequest.m in Sources */,
+				C3455244251294F600F2C7F2 /* DeleteCommentRequest.m in Sources */,
+				C345523E251293AA00F2C7F2 /* CommentListRequest.m in Sources */,
+				C345523B251292E900F2C7F2 /* GroupChatListRequest.m in Sources */,
+				C3455232251291EF00F2C7F2 /* PostGroupChatTextRequest.m in Sources */,
+				C34552382512928F00F2C7F2 /* DeleteGroupChatRequest.m in Sources */,
 				C34551F52512739300F2C7F2 /* SceneDelegate.m in Sources */,
+				C345522F2512915500F2C7F2 /* AwemeListRequest.m in Sources */,
+				C345521D25128EBC00F2C7F2 /* NetworkHelper.m in Sources */,
+				C34552292512905300F2C7F2 /* VisitorRequest.m in Sources */,
+				C345522025128F1B00F2C7F2 /* WebSocketManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +481,7 @@
 		};
 		C34552072512739800F2C7F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CFE4056C41AE1DA07F23B099 /* Pods-SampleDemo-douyin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -304,6 +499,7 @@
 		};
 		C34552082512739800F2C7F2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B8A1824CEA46569F0F1778B /* Pods-SampleDemo-douyin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -1,0 +1,54 @@
+PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - JSONModel (1.8.0)
+  - libwebp (1.1.0):
+    - libwebp/demux (= 1.1.0)
+    - libwebp/mux (= 1.1.0)
+    - libwebp/webp (= 1.1.0)
+  - libwebp/demux (1.1.0):
+    - libwebp/webp
+  - libwebp/mux (1.1.0):
+    - libwebp/demux
+  - libwebp/webp (1.1.0)
+  - Masonry (1.1.0)
+  - SocketRocket (0.5.1)
+
+DEPENDENCIES:
+  - AFNetworking
+  - JSONModel
+  - libwebp
+  - Masonry
+  - SocketRocket
+
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - JSONModel
+    - libwebp
+    - Masonry
+    - SocketRocket
+
+SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
+  libwebp: 499adac5f5d12d7e1953f04316757480a396908b
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+
+PODFILE CHECKSUM: 0a8b3d61e64ebec5cb0f0af443a5750b81bca285
+
+COCOAPODS: 1.10.0.rc.1
