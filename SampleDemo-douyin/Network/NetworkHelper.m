@@ -64,45 +64,77 @@ NSString *const FindComentByPagePath = @"comment/list";
     return manager;
 }
 
+#pragma mark - process response data
++(void) processResponseData:(id)responseObject success:(HttpSuccess)success failure:(HttpFailure)failure {
+    NSInteger code = -1;
+    NSString *message = @"response data error,好像请求的`响应`出错了";
+    if ([responseObject isKindOfClass:NSDictionary.class]) {
+        NSDictionary *dic = (NSDictionary *)responseObject;
+        code = [(NSNumber *)[dic objectForKey:@"code"]integerValue];
+        message = (NSString *)[dic objectForKey:@"message"];
+    }
+    if (code == 0) {
+        success(responseObject);
+    } else {
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:message forKey:NSLocalizedDescriptionKey];
+        NSError *error = [NSError errorWithDomain:NetworkDomain code:HttpResquestFailed userInfo:userInfo];
+        failure(error);
+    }
+    
+}
+
+#pragma mark - GET
 +(NSURLSessionDataTask *) getWithUrlPath:(NSString *)urlPath request:(BaseRequest *)request success:(HttpSuccess)success failure:(HttpFailure)failure{
-    
-}
+    // NSDictionary 不可变的,一旦创建,内容就不能添加\删除(不能改动)
+    NSDictionary *parameters = [request toDictionary];
+    return [[NetworkHelper sharedManager] GET:[BaseUrl stringByAppendingString:urlPath] parameters:parameters headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [NetworkHelper processResponseData:responseObject success:success failure:failure];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        AFNetworkReachabilityStatus status = [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+        // 未连接到网路
+        if (status == AFNetworkReachabilityStatusNotReachable) {
+//            [UIWindow showTips:@"未连接到网络"];
+        }
+    }];
 
-+(NSURLSessionDataTask *) deleteWithUrlPath:(NSString *)urlPath request:(BaseRequest *)request success:(HttpSuccess)success failure:(HttpFailure)failure{
-    
 }
-
-+(NSURLSessionDataTask *) postWithUrlPath:(NSString *)urlPath request:(BaseRequest *)request success:(HttpSuccess)success failure:(HttpFailure)failure{
-    
-}
-
-+(NSURLSessionDataTask *) uploadWithUrlPath:(NSString *)urlPath data:(NSData *)data request:(BaseRequest *)request progress:(UploadProgress)progress success:(HttpSuccess)success failure:(HttpFailure)failure{
-    
-}
-
-+(NSURLSessionDataTask *) uploadWithUrlPath:(NSString *)urlPath dataArray:(NSArray<NSData *> *)dataArray request:(BaseRequest *)request progress:(UploadProgress)progress success:(HttpSuccess)success failure:(HttpFailure)failure{
-    
-}
-
-//Reachability 可达性
-+(AFNetworkReachabilityManager *) shareReachabilityManager{
-    
-}
-
-+ (void) startListening{
-    
-}
-
-+ (AFNetworkReachabilityStatus)networkStatus{
-    
-}
-
-+ (BOOL) isWifiStatus{
-    
-}
-
-+ (BOOL) isNotReachableStatus:(AFNetworkReachabilityStatus)status{
-    
-}
+//
+//+(NSURLSessionDataTask *) deleteWithUrlPath:(NSString *)urlPath request:(BaseRequest *)request success:(HttpSuccess)success failure:(HttpFailure)failure{
+//
+//}
+//
+//+(NSURLSessionDataTask *) postWithUrlPath:(NSString *)urlPath request:(BaseRequest *)request success:(HttpSuccess)success failure:(HttpFailure)failure{
+//
+//}
+//
+//+(NSURLSessionDataTask *) uploadWithUrlPath:(NSString *)urlPath data:(NSData *)data request:(BaseRequest *)request progress:(UploadProgress)progress success:(HttpSuccess)success failure:(HttpFailure)failure{
+//
+//}
+//
+//+(NSURLSessionDataTask *) uploadWithUrlPath:(NSString *)urlPath dataArray:(NSArray<NSData *> *)dataArray request:(BaseRequest *)request progress:(UploadProgress)progress success:(HttpSuccess)success failure:(HttpFailure)failure{
+//
+//}
+//
+////Reachability 可达性
+//+(AFNetworkReachabilityManager *) shareReachabilityManager{
+//
+//}
+//
+//+ (void) startListening{
+//
+//}
+//
+//+ (AFNetworkReachabilityStatus)networkStatus{
+//
+//}
+//
+//+ (BOOL) isWifiStatus{
+//
+//}
+//
+//+ (BOOL) isNotReachableStatus:(AFNetworkReachabilityStatus)status{
+//
+//}
 
 @end

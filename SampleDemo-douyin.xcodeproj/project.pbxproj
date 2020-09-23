@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C3416D83251C0FF700D5A30C /* UIWindow+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C3416D82251C0FF700D5A30C /* UIWindow+Extension.m */; };
 		C34551F22512739300F2C7F2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C34551F12512739300F2C7F2 /* AppDelegate.m */; };
 		C34551F52512739300F2C7F2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C34551F42512739300F2C7F2 /* SceneDelegate.m */; };
 		C34551F82512739300F2C7F2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34551F72512739300F2C7F2 /* ViewController.m */; };
@@ -59,6 +60,8 @@
 /* Begin PBXFileReference section */
 		065D35A858BE460423118ADC /* libPods-SampleDemo-douyin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SampleDemo-douyin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8A1824CEA46569F0F1778B /* Pods-SampleDemo-douyin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleDemo-douyin.release.xcconfig"; path = "Target Support Files/Pods-SampleDemo-douyin/Pods-SampleDemo-douyin.release.xcconfig"; sourceTree = "<group>"; };
+		C3416D81251C0FF700D5A30C /* UIWindow+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Extension.h"; sourceTree = "<group>"; };
+		C3416D82251C0FF700D5A30C /* UIWindow+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Extension.m"; sourceTree = "<group>"; };
 		C34551ED2512739300F2C7F2 /* SampleDemo-douyin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SampleDemo-douyin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C34551F02512739300F2C7F2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C34551F12512739300F2C7F2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -174,6 +177,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C3416D80251C0E7100D5A30C /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				C3416D81251C0FF700D5A30C /* UIWindow+Extension.h */,
+				C3416D82251C0FF700D5A30C /* UIWindow+Extension.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		C34551E42512739300F2C7F2 = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +207,7 @@
 		C34551EF2512739300F2C7F2 /* SampleDemo-douyin */ = {
 			isa = PBXGroup;
 			children = (
+				C3416D80251C0E7100D5A30C /* Category */,
 				C35644442513E1CB007221A6 /* Entity */,
 				C345521825128E4600F2C7F2 /* Network */,
 				C34552092512899200F2C7F2 /* Resource */,
@@ -443,6 +456,7 @@
 				C345523B251292E900F2C7F2 /* GroupChatListRequest.m in Sources */,
 				C38DD40E251BB662001C8988 /* Video.m in Sources */,
 				C356444D2513E2ED007221A6 /* PictureInfo.m in Sources */,
+				C3416D83251C0FF700D5A30C /* UIWindow+Extension.m in Sources */,
 				C35644432513E16C007221A6 /* VisitorResponse.m in Sources */,
 				C3455232251291EF00F2C7F2 /* PostGroupChatTextRequest.m in Sources */,
 				C38DD41A251BBB06001C8988 /* GroupChat.m in Sources */,
