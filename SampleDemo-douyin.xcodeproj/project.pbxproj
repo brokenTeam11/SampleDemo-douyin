@@ -35,6 +35,24 @@
 		C345523E251293AA00F2C7F2 /* CommentListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C345523D251293AA00F2C7F2 /* CommentListRequest.m */; };
 		C34552412512949300F2C7F2 /* PostCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C34552402512949300F2C7F2 /* PostCommentRequest.m */; };
 		C3455244251294F600F2C7F2 /* DeleteCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C3455243251294F600F2C7F2 /* DeleteCommentRequest.m */; };
+		C35644402513E07E007221A6 /* BaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C356443F2513E07E007221A6 /* BaseResponse.m */; };
+		C35644432513E16C007221A6 /* VisitorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C35644422513E16C007221A6 /* VisitorResponse.m */; };
+		C35644472513E20D007221A6 /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = C35644462513E20D007221A6 /* Visitor.m */; };
+		C356444A2513E255007221A6 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C35644492513E255007221A6 /* BaseModel.m */; };
+		C356444D2513E2ED007221A6 /* PictureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C356444C2513E2ED007221A6 /* PictureInfo.m */; };
+		C38DD402251BAF33001C8988 /* UserResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD401251BAF33001C8988 /* UserResponse.m */; };
+		C38DD405251BAF68001C8988 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD404251BAF68001C8988 /* User.m */; };
+		C38DD408251BB622001C8988 /* AwemeResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD407251BB622001C8988 /* AwemeResponse.m */; };
+		C38DD40B251BB636001C8988 /* Aweme.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD40A251BB636001C8988 /* Aweme.m */; };
+		C38DD40E251BB662001C8988 /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD40D251BB662001C8988 /* Video.m */; };
+		C38DD411251BB6A3001C8988 /* Music.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD410251BB6A3001C8988 /* Music.m */; };
+		C38DD414251BB848001C8988 /* AwemeListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD413251BB848001C8988 /* AwemeListResponse.m */; };
+		C38DD417251BBAE3001C8988 /* GroupChatResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD416251BBAE3001C8988 /* GroupChatResponse.m */; };
+		C38DD41A251BBB06001C8988 /* GroupChat.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD419251BBB06001C8988 /* GroupChat.m */; };
+		C38DD41D251BC052001C8988 /* GroupChatListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD41C251BC052001C8988 /* GroupChatListResponse.m */; };
+		C38DD420251BC0A5001C8988 /* CommentResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD41F251BC0A5001C8988 /* CommentResponse.m */; };
+		C38DD423251BC0C0001C8988 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD422251BC0C0001C8988 /* Comment.m */; };
+		C38DD426251BC1DD001C8988 /* CommentListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C38DD425251BC1DD001C8988 /* CommentListResponse.m */; };
 		FB6E017BB91BFB10D33A06A5 /* libPods-SampleDemo-douyin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065D35A858BE460423118ADC /* libPods-SampleDemo-douyin.a */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +106,42 @@
 		C34552402512949300F2C7F2 /* PostCommentRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCommentRequest.m; sourceTree = "<group>"; };
 		C3455242251294F600F2C7F2 /* DeleteCommentRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeleteCommentRequest.h; sourceTree = "<group>"; };
 		C3455243251294F600F2C7F2 /* DeleteCommentRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeleteCommentRequest.m; sourceTree = "<group>"; };
+		C356443E2513E07E007221A6 /* BaseResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseResponse.h; sourceTree = "<group>"; };
+		C356443F2513E07E007221A6 /* BaseResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseResponse.m; sourceTree = "<group>"; };
+		C35644412513E16C007221A6 /* VisitorResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisitorResponse.h; sourceTree = "<group>"; };
+		C35644422513E16C007221A6 /* VisitorResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisitorResponse.m; sourceTree = "<group>"; };
+		C35644452513E20D007221A6 /* Visitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Visitor.h; sourceTree = "<group>"; };
+		C35644462513E20D007221A6 /* Visitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Visitor.m; sourceTree = "<group>"; };
+		C35644482513E255007221A6 /* BaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		C35644492513E255007221A6 /* BaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		C356444B2513E2ED007221A6 /* PictureInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PictureInfo.h; sourceTree = "<group>"; };
+		C356444C2513E2ED007221A6 /* PictureInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictureInfo.m; sourceTree = "<group>"; };
+		C38DD400251BAF33001C8988 /* UserResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserResponse.h; sourceTree = "<group>"; };
+		C38DD401251BAF33001C8988 /* UserResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserResponse.m; sourceTree = "<group>"; };
+		C38DD403251BAF68001C8988 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		C38DD404251BAF68001C8988 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		C38DD406251BB622001C8988 /* AwemeResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AwemeResponse.h; sourceTree = "<group>"; };
+		C38DD407251BB622001C8988 /* AwemeResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AwemeResponse.m; sourceTree = "<group>"; };
+		C38DD409251BB636001C8988 /* Aweme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Aweme.h; sourceTree = "<group>"; };
+		C38DD40A251BB636001C8988 /* Aweme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Aweme.m; sourceTree = "<group>"; };
+		C38DD40C251BB662001C8988 /* Video.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
+		C38DD40D251BB662001C8988 /* Video.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Video.m; sourceTree = "<group>"; };
+		C38DD40F251BB6A3001C8988 /* Music.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
+		C38DD410251BB6A3001C8988 /* Music.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Music.m; sourceTree = "<group>"; };
+		C38DD412251BB848001C8988 /* AwemeListResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AwemeListResponse.h; sourceTree = "<group>"; };
+		C38DD413251BB848001C8988 /* AwemeListResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AwemeListResponse.m; sourceTree = "<group>"; };
+		C38DD415251BBAE3001C8988 /* GroupChatResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupChatResponse.h; sourceTree = "<group>"; };
+		C38DD416251BBAE3001C8988 /* GroupChatResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupChatResponse.m; sourceTree = "<group>"; };
+		C38DD418251BBB06001C8988 /* GroupChat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupChat.h; sourceTree = "<group>"; };
+		C38DD419251BBB06001C8988 /* GroupChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupChat.m; sourceTree = "<group>"; };
+		C38DD41B251BC052001C8988 /* GroupChatListResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupChatListResponse.h; sourceTree = "<group>"; };
+		C38DD41C251BC052001C8988 /* GroupChatListResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupChatListResponse.m; sourceTree = "<group>"; };
+		C38DD41E251BC0A5001C8988 /* CommentResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentResponse.h; sourceTree = "<group>"; };
+		C38DD41F251BC0A5001C8988 /* CommentResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentResponse.m; sourceTree = "<group>"; };
+		C38DD421251BC0C0001C8988 /* Comment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		C38DD422251BC0C0001C8988 /* Comment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		C38DD424251BC1DD001C8988 /* CommentListResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentListResponse.h; sourceTree = "<group>"; };
+		C38DD425251BC1DD001C8988 /* CommentListResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentListResponse.m; sourceTree = "<group>"; };
 		CFE4056C41AE1DA07F23B099 /* Pods-SampleDemo-douyin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleDemo-douyin.debug.xcconfig"; path = "Target Support Files/Pods-SampleDemo-douyin/Pods-SampleDemo-douyin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +195,7 @@
 		C34551EF2512739300F2C7F2 /* SampleDemo-douyin */ = {
 			isa = PBXGroup;
 			children = (
+				C35644442513E1CB007221A6 /* Entity */,
 				C345521825128E4600F2C7F2 /* Network */,
 				C34552092512899200F2C7F2 /* Resource */,
 				C34551F02512739300F2C7F2 /* AppDelegate.h */,
@@ -190,19 +245,12 @@
 		C345521925128E6B00F2C7F2 /* HttpRequest */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			path = HttpRequest;
-			sourceTree = "<group>";
-		};
-		C345521A25128E7B00F2C7F2 /* HttpResponse */ = {
-			isa = PBXGroup;
-			children = (
-				C345522425128F6C00F2C7F2 /* BaseRequest.h */,
 				C345522525128F6C00F2C7F2 /* BaseRequest.m */,
 				C34552272512905300F2C7F2 /* VisitorRequest.h */,
 				C34552282512905300F2C7F2 /* VisitorRequest.m */,
 				C345522A251290EF00F2C7F2 /* UserRequest.h */,
 				C345522B251290EF00F2C7F2 /* UserRequest.m */,
+				C345522425128F6C00F2C7F2 /* BaseRequest.h */,
 				C345522D2512915500F2C7F2 /* AwemeListRequest.h */,
 				C345522E2512915500F2C7F2 /* AwemeListRequest.m */,
 				C3455230251291EF00F2C7F2 /* PostGroupChatTextRequest.h */,
@@ -220,7 +268,57 @@
 				C3455242251294F600F2C7F2 /* DeleteCommentRequest.h */,
 				C3455243251294F600F2C7F2 /* DeleteCommentRequest.m */,
 			);
+			path = HttpRequest;
+			sourceTree = "<group>";
+		};
+		C345521A25128E7B00F2C7F2 /* HttpResponse */ = {
+			isa = PBXGroup;
+			children = (
+				C356443E2513E07E007221A6 /* BaseResponse.h */,
+				C356443F2513E07E007221A6 /* BaseResponse.m */,
+				C35644412513E16C007221A6 /* VisitorResponse.h */,
+				C35644422513E16C007221A6 /* VisitorResponse.m */,
+				C38DD400251BAF33001C8988 /* UserResponse.h */,
+				C38DD401251BAF33001C8988 /* UserResponse.m */,
+				C38DD406251BB622001C8988 /* AwemeResponse.h */,
+				C38DD407251BB622001C8988 /* AwemeResponse.m */,
+				C38DD412251BB848001C8988 /* AwemeListResponse.h */,
+				C38DD413251BB848001C8988 /* AwemeListResponse.m */,
+				C38DD415251BBAE3001C8988 /* GroupChatResponse.h */,
+				C38DD416251BBAE3001C8988 /* GroupChatResponse.m */,
+				C38DD41B251BC052001C8988 /* GroupChatListResponse.h */,
+				C38DD41C251BC052001C8988 /* GroupChatListResponse.m */,
+				C38DD41E251BC0A5001C8988 /* CommentResponse.h */,
+				C38DD41F251BC0A5001C8988 /* CommentResponse.m */,
+				C38DD424251BC1DD001C8988 /* CommentListResponse.h */,
+				C38DD425251BC1DD001C8988 /* CommentListResponse.m */,
+			);
 			path = HttpResponse;
+			sourceTree = "<group>";
+		};
+		C35644442513E1CB007221A6 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				C35644452513E20D007221A6 /* Visitor.h */,
+				C35644462513E20D007221A6 /* Visitor.m */,
+				C35644482513E255007221A6 /* BaseModel.h */,
+				C35644492513E255007221A6 /* BaseModel.m */,
+				C356444B2513E2ED007221A6 /* PictureInfo.h */,
+				C356444C2513E2ED007221A6 /* PictureInfo.m */,
+				C38DD403251BAF68001C8988 /* User.h */,
+				C38DD404251BAF68001C8988 /* User.m */,
+				C38DD409251BB636001C8988 /* Aweme.h */,
+				C38DD40A251BB636001C8988 /* Aweme.m */,
+				C38DD40C251BB662001C8988 /* Video.h */,
+				C38DD40D251BB662001C8988 /* Video.m */,
+				C38DD40F251BB6A3001C8988 /* Music.h */,
+				C38DD410251BB6A3001C8988 /* Music.m */,
+				C38DD418251BBB06001C8988 /* GroupChat.h */,
+				C38DD419251BBB06001C8988 /* GroupChat.m */,
+				C38DD421251BC0C0001C8988 /* Comment.h */,
+				C38DD422251BC0C0001C8988 /* Comment.m */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,24 +424,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C38DD405251BAF68001C8988 /* User.m in Sources */,
 				C345522C251290EF00F2C7F2 /* UserRequest.m in Sources */,
 				C34551F82512739300F2C7F2 /* ViewController.m in Sources */,
+				C38DD417251BBAE3001C8988 /* GroupChatResponse.m in Sources */,
+				C35644472513E20D007221A6 /* Visitor.m in Sources */,
 				C34552352512924C00F2C7F2 /* PostGroupChatImageRequest.m in Sources */,
 				C34551F22512739300F2C7F2 /* AppDelegate.m in Sources */,
 				C34552032512739800F2C7F2 /* main.m in Sources */,
+				C38DD411251BB6A3001C8988 /* Music.m in Sources */,
 				C345522325128F4E00F2C7F2 /* WebCacheHelper.m in Sources */,
+				C38DD426251BC1DD001C8988 /* CommentListResponse.m in Sources */,
 				C345522625128F6C00F2C7F2 /* BaseRequest.m in Sources */,
 				C34552412512949300F2C7F2 /* PostCommentRequest.m in Sources */,
 				C3455244251294F600F2C7F2 /* DeleteCommentRequest.m in Sources */,
 				C345523E251293AA00F2C7F2 /* CommentListRequest.m in Sources */,
+				C38DD41D251BC052001C8988 /* GroupChatListResponse.m in Sources */,
 				C345523B251292E900F2C7F2 /* GroupChatListRequest.m in Sources */,
+				C38DD40E251BB662001C8988 /* Video.m in Sources */,
+				C356444D2513E2ED007221A6 /* PictureInfo.m in Sources */,
+				C35644432513E16C007221A6 /* VisitorResponse.m in Sources */,
 				C3455232251291EF00F2C7F2 /* PostGroupChatTextRequest.m in Sources */,
+				C38DD41A251BBB06001C8988 /* GroupChat.m in Sources */,
+				C356444A2513E255007221A6 /* BaseModel.m in Sources */,
 				C34552382512928F00F2C7F2 /* DeleteGroupChatRequest.m in Sources */,
+				C38DD40B251BB636001C8988 /* Aweme.m in Sources */,
+				C38DD420251BC0A5001C8988 /* CommentResponse.m in Sources */,
+				C38DD408251BB622001C8988 /* AwemeResponse.m in Sources */,
 				C34551F52512739300F2C7F2 /* SceneDelegate.m in Sources */,
+				C35644402513E07E007221A6 /* BaseResponse.m in Sources */,
+				C38DD423251BC0C0001C8988 /* Comment.m in Sources */,
 				C345522F2512915500F2C7F2 /* AwemeListRequest.m in Sources */,
 				C345521D25128EBC00F2C7F2 /* NetworkHelper.m in Sources */,
 				C34552292512905300F2C7F2 /* VisitorRequest.m in Sources */,
 				C345522025128F1B00F2C7F2 /* WebSocketManager.m in Sources */,
+				C38DD414251BB848001C8988 /* AwemeListResponse.m in Sources */,
+				C38DD402251BAF33001C8988 /* UserResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
