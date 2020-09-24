@@ -13,6 +13,8 @@ static char tapKey;
 
 @interface UIWindow (Extension)
 
+@property (strong, nonatomic) UIWindow *window;
+
 +(void)showTips:(NSString *) text;
 
 @end

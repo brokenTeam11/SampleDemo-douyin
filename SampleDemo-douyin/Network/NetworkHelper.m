@@ -7,6 +7,7 @@
 //
 
 #import "NetworkHelper.h"
+#import "UIWindow+Extension.h"
 
 NSString *const NetworkStatesChangeNotification = @"NetworkStatesChangeNotification";
 
@@ -94,7 +95,14 @@ NSString *const FindComentByPagePath = @"comment/list";
         AFNetworkReachabilityStatus status = [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
         // 未连接到网路
         if (status == AFNetworkReachabilityStatusNotReachable) {
-//            [UIWindow showTips:@"未连接到网络"];
+            [UIWindow showTips:@"未连接到网络"];
+            failure(error);
+            return;
+        }
+        // 当服务器无法响应时，使用本地json数据
+        NSString *path = task.originalRequest.URL.path;
+        if ([path containsString:FindUserByUidPath]) {
+//            success([NSString readJ])
         }
     }];
 

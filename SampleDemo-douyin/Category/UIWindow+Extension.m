@@ -11,7 +11,6 @@
 
 @implementation UIWindow (Extension)
 
-#pragma mark - showTips
 +(void)showTips:(NSString *) text{
     /*
      `objc_getAssociatedObject`让一个对象和另一个对象关联起来，即一个对象保持对另一个对象的引用，并可以获取这个对象。关键字是一个void类型的指针。每个关键字必须是唯一的，通常都是会采用静态变量来作为关键字。
