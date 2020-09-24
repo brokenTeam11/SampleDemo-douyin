@@ -36,6 +36,7 @@
 		C345523E251293AA00F2C7F2 /* CommentListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C345523D251293AA00F2C7F2 /* CommentListRequest.m */; };
 		C34552412512949300F2C7F2 /* PostCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C34552402512949300F2C7F2 /* PostCommentRequest.m */; };
 		C3455244251294F600F2C7F2 /* DeleteCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C3455243251294F600F2C7F2 /* DeleteCommentRequest.m */; };
+		C3461188251D19D700B5AC74 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C3461187251D19D700B5AC74 /* NSString+Extension.m */; };
 		C35644402513E07E007221A6 /* BaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C356443F2513E07E007221A6 /* BaseResponse.m */; };
 		C35644432513E16C007221A6 /* VisitorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C35644422513E16C007221A6 /* VisitorResponse.m */; };
 		C35644472513E20D007221A6 /* Visitor.m in Sources */ = {isa = PBXBuildFile; fileRef = C35644462513E20D007221A6 /* Visitor.m */; };
@@ -109,6 +110,8 @@
 		C34552402512949300F2C7F2 /* PostCommentRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCommentRequest.m; sourceTree = "<group>"; };
 		C3455242251294F600F2C7F2 /* DeleteCommentRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeleteCommentRequest.h; sourceTree = "<group>"; };
 		C3455243251294F600F2C7F2 /* DeleteCommentRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeleteCommentRequest.m; sourceTree = "<group>"; };
+		C3461186251D19D700B5AC74 /* NSString+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		C3461187251D19D700B5AC74 /* NSString+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		C356443E2513E07E007221A6 /* BaseResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseResponse.h; sourceTree = "<group>"; };
 		C356443F2513E07E007221A6 /* BaseResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseResponse.m; sourceTree = "<group>"; };
 		C35644412513E16C007221A6 /* VisitorResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisitorResponse.h; sourceTree = "<group>"; };
@@ -182,6 +185,8 @@
 			children = (
 				C3416D81251C0FF700D5A30C /* UIWindow+Extension.h */,
 				C3416D82251C0FF700D5A30C /* UIWindow+Extension.m */,
+				C3461186251D19D700B5AC74 /* NSString+Extension.h */,
+				C3461187251D19D700B5AC74 /* NSString+Extension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -462,6 +467,7 @@
 				C38DD41A251BBB06001C8988 /* GroupChat.m in Sources */,
 				C356444A2513E255007221A6 /* BaseModel.m in Sources */,
 				C34552382512928F00F2C7F2 /* DeleteGroupChatRequest.m in Sources */,
+				C3461188251D19D700B5AC74 /* NSString+Extension.m in Sources */,
 				C38DD40B251BB636001C8988 /* Aweme.m in Sources */,
 				C38DD420251BC0A5001C8988 /* CommentResponse.m in Sources */,
 				C38DD408251BB622001C8988 /* AwemeResponse.m in Sources */,
