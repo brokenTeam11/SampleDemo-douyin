@@ -8,6 +8,7 @@
 
 #import "NetworkHelper.h"
 #import "UIWindow+Extension.h"
+#import "NSString+Extension.h"
 
 NSString *const NetworkStatesChangeNotification = @"NetworkStatesChangeNotification";
 
@@ -102,7 +103,13 @@ NSString *const FindComentByPagePath = @"comment/list";
         // 当服务器无法响应时，使用本地json数据
         NSString *path = task.originalRequest.URL.path;
         if ([path containsString:FindUserByUidPath]) {
-//            success([NSString readJ])
+            success([NSString readJson2DicWithFileName:@"user"]);
+        } else if ([path containsString:FindAwemePostByPagePath]) {
+            success([NSString readJson2DicWithFileName:@"aweme"]);
+        } else if ([path containsString:FindAwemeFavoriteByPagePath]) {
+            success([NSString readJson2DicWithFileName:@"favorites"]);
+        } else if ([path containsString:FindComentByPagePath]) {
+            success([NSString readJson2DicWithFileName:@"comments"]);
         }
     }];
 
