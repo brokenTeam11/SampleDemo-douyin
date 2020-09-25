@@ -112,6 +112,7 @@
 		C3455243251294F600F2C7F2 /* DeleteCommentRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeleteCommentRequest.m; sourceTree = "<group>"; };
 		C3461186251D19D700B5AC74 /* NSString+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		C3461187251D19D700B5AC74 /* NSString+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		C3467661251E45E6000E5F5E /* Douyin+prefix+Header.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Douyin+prefix+Header.pch"; sourceTree = "<group>"; };
 		C356443E2513E07E007221A6 /* BaseResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseResponse.h; sourceTree = "<group>"; };
 		C356443F2513E07E007221A6 /* BaseResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseResponse.m; sourceTree = "<group>"; };
 		C35644412513E16C007221A6 /* VisitorResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisitorResponse.h; sourceTree = "<group>"; };
@@ -226,6 +227,7 @@
 				C34551FE2512739800F2C7F2 /* LaunchScreen.storyboard */,
 				C34552012512739800F2C7F2 /* Info.plist */,
 				C34552022512739800F2C7F2 /* main.m */,
+				C3467661251E45E6000E5F5E /* Douyin+prefix+Header.pch */,
 			);
 			path = "SampleDemo-douyin";
 			sourceTree = "<group>";
@@ -622,11 +624,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZD8RCDB2Y6;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$SRCROOT/SampleDemo-douyin/Douyin+prefix+Header.pch";
 				INFOPLIST_FILE = "SampleDemo-douyin/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xianengqi.SampleDemo-douyin";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -640,11 +645,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZD8RCDB2Y6;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$SRCROOT/SampleDemo-douyin/Douyin+prefix+Header.pch";
 				INFOPLIST_FILE = "SampleDemo-douyin/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xianengqi.SampleDemo-douyin";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -1,0 +1,50 @@
+//
+//  Douyin+prefix+Header.pch
+//  SampleDemo-douyin
+//
+//  Created by 夏能啟 on 2020/9/25.
+//  Copyright © 2020 夏能啟. All rights reserved.
+//
+
+#ifndef Douyin_prefix_Header_pch
+#define Douyin_prefix_Header_pch
+
+
+//UDID MD5_UDID
+/*** SHA256 ***/
+#define UDID [[[UIDevice currentDevice] identifierForVendor] UUIDString]
+#define MD5_SHA256 [UDID md5]
+
+//safe thread
+#define dispatch_main_sync_safe(block)\
+if ([NSThread isMainThread]) {\
+block();\
+} else {\
+dispatch_sync(dispatch_get_main_queue(), block);\
+}
+
+#define diapatch_main_async_safe(block)\
+if ([NSThread isMainThread]) {\
+block();\
+} else {\
+dispatch_async(dispatch_get_main_queue(), block);\
+}
+
+// visitor
+#define writeVisitor(visitor)\
+({\
+NSDictionary *dic = [visitor toDictionary];\
+NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];\
+[defaults setObject:dic forKey:@"visitor"];\
+[defaults synchronize];\
+})
+
+#define readVisitor()\
+({\
+NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];\
+NSDictionary *dic = [defaults objectForKey:@"visitor"];\
+Visitor *visitor = [[Visitor alloc] initWithDictionary:dic error:nil];\
+(visitor);\
+})
+
+#endif /* Douyin_prefix_Header_pch */

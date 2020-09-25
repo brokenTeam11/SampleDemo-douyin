@@ -110,46 +110,109 @@ NSString *const FindComentByPagePath = @"comment/list";
             success([NSString readJson2DicWithFileName:@"favorites"]);
         } else if ([path containsString:FindComentByPagePath]) {
             success([NSString readJson2DicWithFileName:@"comments"]);
+        } else if ([path containsString:FindGroupChatByPagePath]) {
+            success([NSString readJson2DicWithFileName:@"groupchats"]);
+        } else {
+            failure(error);
         }
+        
     }];
 
 }
-//
-//+(NSURLSessionDataTask *) deleteWithUrlPath:(NSString *)urlPath request:(BaseRequest *)request success:(HttpSuccess)success failure:(HttpFailure)failure{
-//
-//}
-//
-//+(NSURLSessionDataTask *) postWithUrlPath:(NSString *)urlPath request:(BaseRequest *)request success:(HttpSuccess)success failure:(HttpFailure)failure{
-//
-//}
-//
-//+(NSURLSessionDataTask *) uploadWithUrlPath:(NSString *)urlPath data:(NSData *)data request:(BaseRequest *)request progress:(UploadProgress)progress success:(HttpSuccess)success failure:(HttpFailure)failure{
-//
-//}
-//
-//+(NSURLSessionDataTask *) uploadWithUrlPath:(NSString *)urlPath dataArray:(NSArray<NSData *> *)dataArray request:(BaseRequest *)request progress:(UploadProgress)progress success:(HttpSuccess)success failure:(HttpFailure)failure{
-//
-//}
-//
+
++(NSURLSessionDataTask *) deleteWithUrlPath:(NSString *)urlPath request:(BaseRequest *)request success:(HttpSuccess)success failure:(HttpFailure)failure{
+    NSDictionary *parameters = [request toDictionary];
+    return [[NetworkHelper sharedManager] DELETE:[BaseUrl stringByAppendingString:urlPath] parameters:parameters headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [NetworkHelper processResponseData:responseObject success:success failure:failure];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(error);
+    }];
+}
+
++(NSURLSessionDataTask *) postWithUrlPath:(NSString *)urlPath request:(BaseRequest *)request success:(HttpSuccess)success failure:(HttpFailure)failure{
+    NSDictionary *paramters = [request toDictionary];
+    return [[NetworkHelper sharedManager] POST:[BaseUrl stringByAppendingString:urlPath] parameters:paramters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [NetworkHelper processResponseData:responseObject success:success failure:failure];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(error);
+    }];
+}
+
++(NSURLSessionDataTask *) uploadWithUrlPath:(NSString *)urlPath data:(NSData *)data request:(BaseRequest *)request progress:(UploadProgress)progress success:(HttpSuccess)success failure:(HttpFailure)failure{
+    // toDictionary方法把对象解析成字典。
+    NSDictionary *paramters = [request toDictionary];
+    return [[NetworkHelper sharedManager] POST:[BaseUrl stringByAppendingString:urlPath] parameters:paramters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:data name:@"file" fileName:@"file" mimeType:@"multipart/form-data"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        dispatch_main_sync_safe(^{
+            progress(uploadProgress.fractionCompleted);
+        });
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [NetworkHelper processResponseData:responseObject success:success failure:failure];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(error);
+    }];
+}
+
++(NSURLSessionDataTask *) uploadWithUrlPath:(NSString *)urlPath dataArray:(NSArray<NSData *> *)dataArray request:(BaseRequest *)request progress:(UploadProgress)progress success:(HttpSuccess)success failure:(HttpFailure)failure{
+    NSDictionary *paramters = [request toDictionary];
+    return [[NetworkHelper sharedManager] POST:[BaseUrl stringByAppendingString:urlPath] parameters:paramters headers:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        for (NSData *data in dataArray) {
+            NSString *fileName = [NSString stringWithFormat:@"%@.jpg", [NSString currentTime]];
+            [formData appendPartWithFileData:data name:@"files" fileName:fileName mimeType:@"multipart/form-data"];
+        }
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        progress(uploadProgress.fractionCompleted);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [NetworkHelper processResponseData:responseObject success:success failure:failure];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(error);
+    }];
+}
+
 ////Reachability 可达性
-//+(AFNetworkReachabilityManager *) shareReachabilityManager{
-//
-//}
-//
-//+ (void) startListening{
-//
-//}
-//
-//+ (AFNetworkReachabilityStatus)networkStatus{
-//
-//}
-//
-//+ (BOOL) isWifiStatus{
-//
-//}
-//
-//+ (BOOL) isNotReachableStatus:(AFNetworkReachabilityStatus)status{
-//
-//}
++(AFNetworkReachabilityManager *) shareReachabilityManager{
+    static dispatch_once_t onceToken;
+    static AFNetworkReachabilityManager *manager;
+    dispatch_once(&onceToken, ^{
+        manager = [AFNetworkReachabilityManager manager];
+    });
+    return manager;
+}
+
++ (void) startListening{
+    [[NetworkHelper shareReachabilityManager] startMonitoring];
+    [[NetworkHelper shareReachabilityManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NetworkStatesChangeNotification object:nil];
+        if (![NetworkHelper isNotReachableStatus:status]) {
+            [NetworkHelper registerUserInfo];
+        }
+    }];
+}
+
++ (AFNetworkReachabilityStatus)networkStatus{
+    return [NetworkHelper shareReachabilityManager].networkReachabilityStatus;
+}
+
++ (BOOL) isWifiStatus{
+    return [NetworkHelper shareReachabilityManager].networkReachabilityStatus == AFNetworkReachabilityStatusReachableViaWiFi;
+}
+
++ (BOOL) isNotReachableStatus:(AFNetworkReachabilityStatus)status{
+    return status == AFNetworkReachabilityStatusNotReachable;
+}
+
+//visitor
++ (void) registerUserInfo {
+    VisitorRequest *request = [VisitorRequest new];
+    request.udid = UDID;
+    [NetworkHelper postWithUrlPath:CreateVisitorPath request:request success:^(id data) {
+        VisitorResponse *response = [[VisitorResponse alloc] initWithDictionary:data error:nil];
+        writeVisitor(response.data);
+    } failure:^(NSError *error) {
+        NSLog(@"Register visitor failed.");
+    }];
+}
 
 @end
