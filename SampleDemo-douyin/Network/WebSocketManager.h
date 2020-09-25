@@ -13,4 +13,13 @@ extern NSString *const WebSocketDidReceiveMessageNotification;
 
 @interface WebSocketManager : NSObject
 
+// WebSocketManager 单例
++ (instancetype)shareManager;
+// 断开连接
+- (void)disConnect;
+// 连接
+- (void)connect;
+// 发送消息
+- (void)sendMessage:(id)msg;
+
 @end
