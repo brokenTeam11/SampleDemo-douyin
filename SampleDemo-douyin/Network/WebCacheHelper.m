@@ -122,14 +122,14 @@
 }
 
 // 根据key值从内存和本地磁盘中查询缓存数据，所查询缓存数据包含指定文件类型
--(NSOperation *)queryURLFromDiskMemory:(NSString *)key cacheQueryCompletedBlock:(WebCacheQueryCompletedBlock)cacheQueryCompletedBlock extension:(NSString *)extension {
+- (NSOperation *)queryURLFromDiskMemory:(NSString *)key cacheQueryCompletedBlock:(WebCacheQueryCompletedBlock)cacheQueryCompletedBlock extension:(NSString *)extension {
     NSOperation *operation = [NSOperation new];
     dispatch_async(_ioQueue, ^{
-        if(operation.isCancelled) {
+        if (operation.isCancelled) {
             return;
         }
         NSString *path = [self diskCachePathForKey:key extension:extension];
-        if([self.fileManager fileExistsAtPath:path]) {
+        if ([self.fileManager fileExistsAtPath:path]) {
             cacheQueryCompletedBlock(path, YES);
         } else {
             cacheQueryCompletedBlock(path, NO);
@@ -166,13 +166,14 @@
         [self.memCache setObject:data forKey:key];
     }
 }
+
 // 存储缓存数据到本地磁盘
 - (void)storeDataToDiskCache:(NSData *)data key:(NSString *)key {
     [self storeDataToDiskCache:data key:key extension:nil];
 }
 
 // 根据key值从本地磁盘中查询缓存数据， 缓存数据返回路径包含文件类型
-- (void)storeDataToDiskCache:(NSData *)data key:(NSString *)key extension:(NSString *)extension{
+- (void)storeDataToDiskCache:(NSData *)data key:(NSString *)key extension:(NSString *)extension {
     if (data && key) {
         [_fileManager createFileAtPath:[self diskCachePathForKey:key extension:extension] contents:data attributes:nil];
     }
@@ -187,12 +188,14 @@
     }
     return cachePathForKey;
 }
+
 // 获取key值对应的磁盘缓存文件路径
-- (NSString *)diskCachePathForKey:(NSString *)key{
+- (NSString *)diskCachePathForKey:(NSString *)key {
     return [self diskCachePathForKey:key extension:nil];
 }
+
 // 清除内存和本地磁盘缓存数据
-- (void)clearCache:(WebCacheClearCompletedBlock)cacheClearCompletedBlock{
+- (void)clearCache:(WebCacheClearCompletedBlock)cacheClearCompletedBlock {
     dispatch_async(_ioQueue, ^{
         [self clearMemoryCache];
         NSString *cacheSize = [self clearDiskCache];
@@ -205,25 +208,26 @@
 }
 
 // 清除内存缓存数据
-- (void)clearMemoryCache{
+- (void)clearMemoryCache {
     [_memCache removeAllObjects];
 }
 
 // 清除本地磁盘缓存数据
-- (NSString *)clearDiskCache{
+- (NSString *)clearDiskCache {
     NSArray *contents = [_fileManager contentsOfDirectoryAtPath:_diskCacheDirectoryURL.path error:nil];
     NSEnumerator *enumerator = [contents objectEnumerator];
     NSString *fileName;
     CGFloat folderSize = 0.0f;
-    
+
     while ((fileName = [enumerator nextObject])) {
         NSString *filePath = [_diskCacheDirectoryURL.path stringByAppendingPathComponent:fileName];
         folderSize += [_fileManager attributesOfItemAtPath:filePath error:nil].fileSize;
         [_fileManager removeItemAtPath:filePath error:NULL];
     }
-    return [NSString stringWithFormat:@"%.2f", folderSize/1024.0f/1024.0f]; // `@"%.2f"`精度浮点数,且只保留两位小数
+    return [NSString stringWithFormat:@"%.2f", folderSize / 1024.0f / 1024.0f]; // `@"%.2f"`精度浮点数,且只保留两位小数
 }
 
+#pragma mark - key值进行md5签名
 // key值进行md5签名
 - (NSString *)md5:(NSString *)key {
     if (!key) {
@@ -238,33 +242,32 @@
     }
     return output;
 }
+
 @end
 
-
-
-
-
-
-
+#pragma mark - 自定义用于下载网络资源的NSOperation任务
 // 自定义用于下载网络资源的NSOperation任务
 @interface WebDownloadOperation ()
-@property(nonatomic, copy) WebDownloadResponseBlock responseBlock; // 下载进度响应block
-@property(nonatomic, copy) WebDownloadProgressBlock progressBlock; // 下载进度回调block
-@property(nonatomic, copy) WebDownloadCompletedBlock completedBlock; // 下载完成回调block
-@property(nonatomic, copy) WebDownloadCancelBlock cancelBlock; // 取消下载回调block
-@property(nonatomic, strong) NSMutableData *data; // 用于存储网络资源数据
-@property(assign, nonatomic) NSInteger expectedSize; // 网络资源数据总大小
-@property(assign, nonatomic) BOOL executing; // 判断NSOperation是否执行
-@property(assign, nonatomic) BOOL finished; // 判断NSOperation是否结束
+@property (nonatomic, copy) WebDownloadResponseBlock responseBlock; // 下载进度响应block
+@property (nonatomic, copy) WebDownloadProgressBlock progressBlock; // 下载进度回调block
+@property (nonatomic, copy) WebDownloadCompletedBlock completedBlock; // 下载完成回调block
+@property (nonatomic, copy) WebDownloadCancelBlock cancelBlock; // 取消下载回调block
+@property (nonatomic, strong) NSMutableData *data; // 用于存储网络资源数据
+@property (assign, nonatomic) NSInteger expectedSize; // 网络资源数据总大小
+@property (assign, nonatomic) BOOL executing; // 判断NSOperation是否执行
+@property (assign, nonatomic) BOOL finished; // 判断NSOperation是否结束
 @end
 
-
-
+/*
+ ------------*****-----------------
+ */
+#pragma mark -
 @implementation WebDownloadOperation
 @synthesize executing = _executing; // 指定executing别名为_executing
 @synthesize finished = _finished; //指定finished别名为_finished
+#pragma mark -  初始化数据
 // 初始化数据
-- (instancetype)initWithRequest:(NSURLRequest *)request responseBlock:(WebDownloadResponseBlock)responseBlock progressBlock:(WebDownloadProgressBlock)progressBlock completedBlock:(WebDownloadCompletedBlock)completedBlock cancelBlock:(WebDownloadCancelBlock)cancelBlock{
+- (instancetype)initWithRequest:(NSURLRequest *)request responseBlock:(WebDownloadResponseBlock)responseBlock progressBlock:(WebDownloadProgressBlock)progressBlock completedBlock:(WebDownloadCompletedBlock)completedBlock cancelBlock:(WebDownloadCancelBlock)cancelBlock {
     if ((self = [super init])) {
         _request = [request copy];
         _responseBlock = [responseBlock copy];
@@ -275,18 +278,18 @@
     return self;
 }
 
-- (void) start {
+#pragma mark - start
+- (void)start {
     [self willChangeValueForKey:@"isExecuting"];
     _executing = YES;
     [self didChangeValueForKey:@"isExecuting"];
-    
     // 判断任务执行前是否取消了任务
     if (self.isCancelled) {
         [self done];
         return;
     }
     @synchronized (self) {
-        // 创建网络资源下载请求， 并设置网络请求代理
+        // 创建网络资源下载 请求， 并设置网络请求代理
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
         sessionConfig.timeoutIntervalForRequest = 15;
         _session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:NSOperationQueue.mainQueue];
@@ -295,30 +298,31 @@
     }
 }
 
-- (BOOL) isExecuting {
+- (BOOL)isExecuting {
     return _executing;
 }
 
-- (BOOL) isFinished {
+- (BOOL)isFinished {
     return _finished;
 }
 
-- (BOOL) isAsynchronous {
+- (BOOL)isAsynchronous {
     return YES;
 }
 
+#pragma mark -  取消任务
 // 取消任务
-- (void) cancel{
+- (void)cancel {
     @synchronized (self) {
         [self done];
-        
     }
 }
 
+#pragma mark - 更新任务状态
 // 更新任务状态
-- (void) done{
+- (void)done {
     [super cancel];
-    if(_executing){
+    if (_executing) {
         [self willChangeValueForKey:@"isFinished"];
         [self willChangeValueForKey:@"isExecuting"];
         _finished = YES;
@@ -329,8 +333,9 @@
     }
 }
 
+#pragma mark - 重置请求数据
 // 重置请求数据
-- (void) reset {
+- (void)reset {
     if (self.dataTask) {
         [_dataTask cancel];
     }
@@ -340,8 +345,9 @@
     }
 }
 
+#pragma mark - 网络资源下载请求获得响应
 // 网络资源下载请求获得响应
-- (void) URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(nonnull NSURLResponse *)response completionHandler:(nonnull void (^)(NSURLSessionResponseDisposition))completionHandler{
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(nonnull NSURLResponse *)response completionHandler:(nonnull void (^)(NSURLSessionResponseDisposition))completionHandler {
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
     if (_responseBlock) {
         _responseBlock(httpResponse);
@@ -356,4 +362,51 @@
         completionHandler(NSURLSessionResponseCancel);
     }
 }
+
+#pragma mark - 网络资源下载请求完毕
+// 网络资源下载请求完毕
+- (void)URLSession:(NSURLSession *)session task:(nonnull NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error{
+    if (_completedBlock) {
+        if (error) {
+            if (error.code == NSURLErrorCancelled) {
+                _cancelBlock();
+            } else {
+                _completedBlock(nil, error, NO);
+            }
+        } else {
+            _completedBlock(self.data, nil, YES);
+        }
+    }
+    [self done];
+}
+#pragma mark - 接收网络资源下载数据
+// 接收网络资源下载数据
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
+    didReceiveData:(NSData *)data {
+    [self.data appendData:data];
+    if (self.progressBlock) {
+        self.progressBlock(self.data.length, self.expectedSize, data);
+    }
+}
+
+#pragma mark - 网络缓存数据复用
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
+willCacheResponse:(NSCachedURLResponse *)proposedResponse
+ completionHandler:(void (^)(NSCachedURLResponse * _Nullable cachedResponse))completionHandler{
+    NSCachedURLResponse *cacheResponse = proposedResponse;
+    if (self.request.cachePolicy == NSURLRequestReloadIgnoringLocalCacheData) {
+        cacheResponse = nil;
+    }
+    if (completionHandler) {
+        completionHandler(cacheResponse);
+    }
+}
+
 @end
+
+
+/*
+ ------------------------------************------------------------------
+ */
+
+#pragma mark - 自定义网络资源下载器
