@@ -196,6 +196,11 @@
     dispatch_async(_ioQueue, ^{
         [self clearMemoryCache];
         NSString *cacheSize = [self clearDiskCache];
+        if (cacheClearCompletedBlock) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cacheClearCompletedBlock(cacheSize);
+            });
+        }
     });
 }
 
@@ -232,5 +237,123 @@
         [output appendFormat:@"%02x", digest[i]];
     }
     return output;
+}
+@end
+
+
+
+
+
+
+
+// 自定义用于下载网络资源的NSOperation任务
+@interface WebDownloadOperation ()
+@property(nonatomic, copy) WebDownloadResponseBlock responseBlock; // 下载进度响应block
+@property(nonatomic, copy) WebDownloadProgressBlock progressBlock; // 下载进度回调block
+@property(nonatomic, copy) WebDownloadCompletedBlock completedBlock; // 下载完成回调block
+@property(nonatomic, copy) WebDownloadCancelBlock cancelBlock; // 取消下载回调block
+@property(nonatomic, strong) NSMutableData *data; // 用于存储网络资源数据
+@property(assign, nonatomic) NSInteger expectedSize; // 网络资源数据总大小
+@property(assign, nonatomic) BOOL executing; // 判断NSOperation是否执行
+@property(assign, nonatomic) BOOL finished; // 判断NSOperation是否结束
+@end
+
+
+
+@implementation WebDownloadOperation
+@synthesize executing = _executing; // 指定executing别名为_executing
+@synthesize finished = _finished; //指定finished别名为_finished
+// 初始化数据
+- (instancetype)initWithRequest:(NSURLRequest *)request responseBlock:(WebDownloadResponseBlock)responseBlock progressBlock:(WebDownloadProgressBlock)progressBlock completedBlock:(WebDownloadCompletedBlock)completedBlock cancelBlock:(WebDownloadCancelBlock)cancelBlock{
+    if ((self = [super init])) {
+        _request = [request copy];
+        _responseBlock = [responseBlock copy];
+        _progressBlock = [progressBlock copy];
+        _completedBlock = [completedBlock copy];
+        _cancelBlock = [cancelBlock copy];
+    }
+    return self;
+}
+
+- (void) start {
+    [self willChangeValueForKey:@"isExecuting"];
+    _executing = YES;
+    [self didChangeValueForKey:@"isExecuting"];
+    
+    // 判断任务执行前是否取消了任务
+    if (self.isCancelled) {
+        [self done];
+        return;
+    }
+    @synchronized (self) {
+        // 创建网络资源下载请求， 并设置网络请求代理
+        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+        sessionConfig.timeoutIntervalForRequest = 15;
+        _session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:NSOperationQueue.mainQueue];
+        _dataTask = [_session dataTaskWithRequest:_request];
+        [_dataTask resume];
+    }
+}
+
+- (BOOL) isExecuting {
+    return _executing;
+}
+
+- (BOOL) isFinished {
+    return _finished;
+}
+
+- (BOOL) isAsynchronous {
+    return YES;
+}
+
+// 取消任务
+- (void) cancel{
+    @synchronized (self) {
+        [self done];
+        
+    }
+}
+
+// 更新任务状态
+- (void) done{
+    [super cancel];
+    if(_executing){
+        [self willChangeValueForKey:@"isFinished"];
+        [self willChangeValueForKey:@"isExecuting"];
+        _finished = YES;
+        _executing = NO;
+        [self didChangeValueForKey:@"isFinished"];
+        [self didChangeValueForKey:@"isExecuting"];
+        [self reset];
+    }
+}
+
+// 重置请求数据
+- (void) reset {
+    if (self.dataTask) {
+        [_dataTask cancel];
+    }
+    if (self.session) {
+        [self.session invalidateAndCancel];
+        self.session = nil;
+    }
+}
+
+// 网络资源下载请求获得响应
+- (void) URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(nonnull NSURLResponse *)response completionHandler:(nonnull void (^)(NSURLSessionResponseDisposition))completionHandler{
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    if (_responseBlock) {
+        _responseBlock(httpResponse);
+    }
+    NSInteger code = [httpResponse statusCode];
+    if (code == 200) {
+        completionHandler(NSURLSessionResponseAllow);
+        self.data = [NSMutableData new];
+        NSInteger expected = response.expectedContentLength > 0 ? (NSInteger)response.expectedContentLength : 0;
+        self.expectedSize = expected;
+    } else {
+        completionHandler(NSURLSessionResponseCancel);
+    }
 }
 @end
