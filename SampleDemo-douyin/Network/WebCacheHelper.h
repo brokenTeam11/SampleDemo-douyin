@@ -29,9 +29,9 @@ typedef void (^WebDownloadCancelBlock)(void);
 // 网络资源下载取消后的回调
 @property (nonatomic, copy) WebDownloadCancelBlock cancelBlock;
 // 查询缓存NSOperation任务
-@property (nonatomic, strong) NSOperation *cacheOperation;
+@property (strong, nonatomic) NSOperation *cacheOperation;
 // 下载网络资源任务
-@property (nonatomic, strong) WebDownloadOperation *downloadOperation;
+@property (strong, nonatomic) WebDownloadOperation     *downloadOperation;
 // 取消查询缓存NSOperation任务和下载资源WebDownloadOperation任务
 - (void)cancel;
 @end
@@ -52,14 +52,27 @@ typedef void (^WebDownloadCancelBlock)(void);
 - (NSOperation *)queryURLFromDiskMemory:(NSString *)key cacheQueryCompletedBlock:(WebCacheQueryCompletedBlock)cacheQueryCompletedBlock extension:(NSString *)extension;
 
 // 存储缓存数据到本地磁盘
-- (void)storeDataDiskCache:(NSData *)data key:(NSString *)key;
+- (void)storeDataToDiskCache:(NSData *)data key:(NSString *)key;
 
-- (void)storeDataDiskCache:(NSData *)data key:(NSString *)key extension:(NSString *)extension;
+- (void)storeDataToDiskCache:(NSData *)data key:(NSString *)key extension:(NSString *)extension;
 
 //  清除本地磁盘缓存数据
 - (void)clearCache:(WebCacheClearCompletedBlock)cacheClearCompletedBlock;
 
 @end
+
+
+// 自定义用于下载网络资源的NSOperation任务
+@interface WebDownloadOperation : NSOperation <NSURLSessionTaskDelegate, NSURLSessionDataDelegate>
+@property(strong, nonatomic) NSURLSession *session;
+@property(strong, nonatomic) NSURLSessionTask *dataTask;
+@property(strong, nonatomic, readonly) NSURLRequest *request;
+
+// 初始化
+- (instancetype)initWithRequest:(NSURLRequest *)request responseBlock:(WebDownloadResponseBlock)responseBlock progressBlock:(WebDownloadProgressBlock)progressBlock completedBlock:(WebDownloadCompletedBlock)completedBlock cancelBlock:(WebDownloadCancelBlock)cancelBlock;
+
+@end
+
 
 // 自定义网络资源下载器
 @interface WebDownloader : NSObject
