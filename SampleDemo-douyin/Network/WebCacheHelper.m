@@ -160,15 +160,6 @@
     });
 }
 
-// 获取key值对应的磁盘缓存文件路径， 文件路径包含指定扩展名
-- (NSString *)diskCachePathForKey:(NSString *)key extension:(NSString *)extension {
-    NSString *fileName = [self md5:key];
-    NSString *cachePathForKey = [_diskCacheDirectoryURL URLByAppendingPathComponent:fileName].path;
-    if (extension) {
-        cachePathForKey = [cachePathForKey stringByAppendingFormat:@".%@", extension];
-    }
-    return cachePathForKey;
-}
 // 存储缓存数据到内存
 - (void)storeDataToMemoryCache:(NSData *)data key:(NSString *)key {
     if (data && key) {
@@ -178,6 +169,54 @@
 // 存储缓存数据到本地磁盘
 - (void)storeDataToDiskCache:(NSData *)data key:(NSString *)key {
     [self storeDataToDiskCache:data key:key extension:nil];
+}
+
+// 根据key值从本地磁盘中查询缓存数据， 缓存数据返回路径包含文件类型
+- (void)storeDataToDiskCache:(NSData *)data key:(NSString *)key extension:(NSString *)extension{
+    if (data && key) {
+        [_fileManager createFileAtPath:[self diskCachePathForKey:key extension:extension] contents:data attributes:nil];
+    }
+}
+
+// 获取key值对应的磁盘缓存文件路径， 文件路径包含指定扩展名
+- (NSString *)diskCachePathForKey:(NSString *)key extension:(NSString *)extension {
+    NSString *fileName = [self md5:key];
+    NSString *cachePathForKey = [_diskCacheDirectoryURL URLByAppendingPathComponent:fileName].path;
+    if (extension) {
+        cachePathForKey = [cachePathForKey stringByAppendingFormat:@".%@", extension];
+    }
+    return cachePathForKey;
+}
+// 获取key值对应的磁盘缓存文件路径
+- (NSString *)diskCachePathForKey:(NSString *)key{
+    return [self diskCachePathForKey:key extension:nil];
+}
+// 清除内存和本地磁盘缓存数据
+- (void)clearCache:(WebCacheClearCompletedBlock)cacheClearCompletedBlock{
+    dispatch_async(_ioQueue, ^{
+        [self clearMemoryCache];
+        NSString *cacheSize = [self clearDiskCache];
+    });
+}
+
+// 清除内存缓存数据
+- (void)clearMemoryCache{
+    [_memCache removeAllObjects];
+}
+
+// 清除本地磁盘缓存数据
+- (NSString *)clearDiskCache{
+    NSArray *contents = [_fileManager contentsOfDirectoryAtPath:_diskCacheDirectoryURL.path error:nil];
+    NSEnumerator *enumerator = [contents objectEnumerator];
+    NSString *fileName;
+    CGFloat folderSize = 0.0f;
+    
+    while ((fileName = [enumerator nextObject])) {
+        NSString *filePath = [_diskCacheDirectoryURL.path stringByAppendingPathComponent:fileName];
+        folderSize += [_fileManager attributesOfItemAtPath:filePath error:nil].fileSize;
+        [_fileManager removeItemAtPath:filePath error:NULL];
+    }
+    return [NSString stringWithFormat:@"%.2f", folderSize/1024.0f/1024.0f]; // `@"%.2f"`精度浮点数,且只保留两位小数
 }
 
 // key值进行md5签名
@@ -194,8 +233,4 @@
     }
     return output;
 }
-
-
-
-
 @end
