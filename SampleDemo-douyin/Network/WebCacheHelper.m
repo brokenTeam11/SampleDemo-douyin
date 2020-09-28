@@ -365,7 +365,7 @@
 
 #pragma mark - 网络资源下载请求完毕
 // 网络资源下载请求完毕
-- (void)URLSession:(NSURLSession *)session task:(nonnull NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error{
+- (void)URLSession:(NSURLSession *)session task:(nonnull NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error {
     if (_completedBlock) {
         if (error) {
             if (error.code == NSURLErrorCancelled) {
@@ -379,6 +379,7 @@
     }
     [self done];
 }
+
 #pragma mark - 接收网络资源下载数据
 // 接收网络资源下载数据
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
@@ -390,9 +391,9 @@
 }
 
 #pragma mark - 网络缓存数据复用
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
-willCacheResponse:(NSCachedURLResponse *)proposedResponse
- completionHandler:(void (^)(NSCachedURLResponse * _Nullable cachedResponse))completionHandler{
+- (void)   URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
+    willCacheResponse:(NSCachedURLResponse *)proposedResponse
+    completionHandler:(void (^)(NSCachedURLResponse *_Nullable cachedResponse))completionHandler {
     NSCachedURLResponse *cacheResponse = proposedResponse;
     if (self.request.cachePolicy == NSURLRequestReloadIgnoringLocalCacheData) {
         cacheResponse = nil;
@@ -404,9 +405,237 @@ willCacheResponse:(NSCachedURLResponse *)proposedResponse
 
 @end
 
-
 /*
- ------------------------------************------------------------------
+ ------------------------------******* NSOperation 和 NSOperationQueue 分别对应 GCD 的 任务 和 队列 *****------------------------------
+  @synchronized(self) {
+    //需要执行的代码块
+  }
+ 互斥锁 ：给需要同步的代码块加一个互斥锁，就可以保证每次只有一个线程访问此代码块。
+ --------------------**************----------------------------------
  */
 
 #pragma mark - 自定义网络资源下载器
+@implementation WebDownloader
+#pragma mark - 单例
++ (WebDownloader *)sharedDownloader {
+    static dispatch_once_t onceToken;
+    static id instance;
+    dispatch_once(&onceToken, ^{
+        instance = [self new];
+    });
+    return instance;
+}
+
+#pragma mark - 初始化
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        // 初始化并行下载队列
+        _downloadConcurrentQueue = [NSOperationQueue new];
+        _downloadConcurrentQueue.name = @"com.concurrent.webdownloader";
+        _downloadConcurrentQueue.maxConcurrentOperationCount = 6; // maxConcurrentOperationCount 最大并发数，用来设置最多可以让多少个任务同时执行。
+
+        //  初始化串行下载队列
+        _downloadSerialQueue = [NSOperationQueue new];
+        _downloadSerialQueue.name = @"com.serial.webdownloader";
+        _downloadSerialQueue.maxConcurrentOperationCount = 1;
+
+        // 初始化后台串行下载队列
+        _downloadBackgroundQueue = [NSOperationQueue new];
+        _downloadBackgroundQueue.name = @"com.background.webdownloader";
+        _downloadBackgroundQueue.maxConcurrentOperationCount = 1;
+        _downloadBackgroundQueue.qualityOfService = NSQualityOfServiceBackground; // `NSQualityOfServiceBackground` 后台优先级，用于完全不紧急的任务
+
+        // 初始化高优先级下载队列
+        _downloadPriorityHighQueue = [NSOperationQueue new];
+        _downloadPriorityHighQueue.name = @"com.priority.webdownloader";
+        _downloadPriorityHighQueue.maxConcurrentOperationCount = 1;
+        _downloadPriorityHighQueue.qualityOfService = NSQualityOfServiceUserInteractive;
+        [_downloadPriorityHighQueue addObserver:self forKeyPath:@"operations" options:NSKeyValueObservingOptionNew context:nil];
+    }
+    return self;
+}
+
+#pragma mark - 下载指定URL网络资源
+- (WebCombineOperation *)downloadWithURL:(NSURL *)url
+                           progressBlock:(WebDownloadProgressBlock)progressBlock
+                          completedBlock:(WebDownloadCompletedBlock)completedBlock
+                             cancelBlock:(WebDownloadCancelBlock)cancelBlock {
+    return [self downloadWithURL:url responseBlock:nil progressBlock:progressBlock completedBlock:completedBlock cancelBlock:cancelBlock isConcurrent:YES];
+}
+
+- (WebCombineOperation *)downloadWithURL:(NSURL *)url
+                           progressBlock:(WebDownloadProgressBlock)progressBlock
+                          completedBlock:(WebDownloadCompletedBlock)completedBlock
+                             cancelBlock:(WebDownloadCancelBlock)cancelBlock
+                            isConcurrent:(BOOL)isConcurrent {
+    return [self downloadWithURL:url responseBlock:nil progressBlock:progressBlock completedBlock:completedBlock cancelBlock:cancelBlock isConcurrent:isConcurrent];
+}
+
+- (WebCombineOperation *)downloadWithURL:(NSURL *)url
+                           responseBlock:(WebDownloadResponseBlock)responseBlock
+                           progressBlock:(WebDownloadProgressBlock)progressBlock
+                          completedBlock:(WebDownloadCompletedBlock)completedBlock
+                             cancelBlock:(WebDownloadCancelBlock)cancelBlock {
+    return [self downloadWithURL:url responseBlock:responseBlock progressBlock:progressBlock completedBlock:completedBlock cancelBlock:cancelBlock isConcurrent:YES];
+}
+
+#pragma mark - 初始化网络资源下载请求
+- (WebCombineOperation *)downloadWithURL:(NSURL *)url
+                           responseBlock:(WebDownloadResponseBlock)responseBlock
+                           progressBlock:(WebDownloadProgressBlock)progressBlock
+                          completedBlock:(WebDownloadCompletedBlock)completedBlock
+                             cancelBlock:(WebDownloadCancelBlock)cancelBlock
+                            isConcurrent:(BOOL)isConcurrent {
+    // 初始化网络资源下载请求
+    /*
+     NSMutableURLRequest是NSURLRequest的子类，常用方法有
+
+     设置请求超时等待时间（超过这个时间就算超时，请求失败）- (void)setTimeoutInterval:(NSTimeInterval)seconds;
+
+     设置请求方法（比如GET和POST）- (void)setHTTPMethod:(NSString *)method;
+
+     设置请求体- (void)setHTTPBody:(NSData *)data;
+
+     设置请求头- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
+
+
+     */
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:15];
+    // HTTPShouldUsePipelining 设置请求时是否按顺序收发 默认禁用 在某些服务器中设为YES可以提高网络性能
+    request.HTTPShouldUsePipelining = YES;
+    //网络资源路径作为key 值
+    __block NSString *key = url.absoluteString;
+    // 初始化组合任务WebCombineOperation， 由查询二级缓存的NSOperation任务和用于下载资源的WebDownloadOperation任务组成，方便后续取消任务。
+    __block WebCombineOperation *operation = [WebCombineOperation new];
+    // 可以根据typeof（）括号里面的变量，自动识别变量类型并返回该类型。
+    // `__weak __typeof(self)wself = self;` 实现弱引用
+    __weak __typeof(self) wself = self;
+    // 赋值组合任务WebCombineOperation中的查找缓存NSOperation任务
+    operation.cacheOperation = [[WebCacheHelper sharedWebCache] queryDataFromMemory:key cacheQueryCompletedBlock:^(id data, BOOL hasCache) {
+        // 判断是否查找到缓存
+        if (hasCache) {
+            // 查找到则直接返回缓存数据
+            if (completedBlock) {
+                completedBlock(data, nil, YES);
+            }
+        } else {
+            // 未查找到则创建下载网络资源的WebDownloadOperation任务，并赋值组合任务WebCombineOperation
+            operation.downloadOperation = [[WebDownloadOperation alloc] initWithRequest:request responseBlock:^(NSHTTPURLResponse *response) {
+                if (responseBlock) {
+                    responseBlock(response);
+                }
+            } progressBlock:progressBlock completedBlock:^(NSData *data, NSError *error, BOOL finished) {
+                // 网络资源下载完毕， 处理返回数据
+                if (completedBlock) {
+                    if (finished && !error) {
+                        // 若下载任务没有错误的情况下完成，则将下载数据进行缓存
+                        [[WebCacheHelper sharedWebCache] storeDataChace:data forKey:key];
+                        // 任务完成回调
+                        completedBlock(data, nil, YES);
+                    } else {
+                        // 任务失败回调
+                        completedBlock(data, error, NO);
+                    }
+                }
+            } cancelBlock:^{
+                // 任务取消回调
+                if (cancelBlock) {
+                    cancelBlock();
+                }
+            }];
+            // 将下载任务添加进队列
+            if (isConcurrent) {
+                [wself.downloadConcurrentQueue addOperation:operation.downloadOperation];
+            } else {
+                [wself.downloadSerialQueue addOperation:operation.downloadOperation];
+            }
+        }
+    }];
+    // 返回包含了查询任务和下载任务的组合任务
+    return operation;
+}
+
+- (WebCombineOperation *)downloadWithURL:(NSURL *)url
+                           responseBlock:(WebDownloadResponseBlock)responseBlock
+                           progressBlock:(WebDownloadProgressBlock)progressBlock
+                          completedBlock:(WebDownloadCompletedBlock)completedBlock
+                             cancelBlock:(WebDownloadCancelBlock)cancelBlock
+                            isBackground:(BOOL)isBackground {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:15];
+    // HTTPShouldUsePipelining 设置请求时是否按顺序收发 默认禁用 在某些服务器中设为YES可以提高网络性能
+    request.HTTPShouldUsePipelining = YES;
+    //网络资源路径作为key 值
+    __block NSString *key = url.absoluteString;
+    // 初始化组合任务WebCombineOperation
+    __block WebCombineOperation *operation = [WebCombineOperation new];
+    // 可以根据typeof（）括号里面的变量，自动识别变量类型并返回该类型。
+    // `__weak __typeof(self)wself = self;` 实现弱引用
+    __weak __typeof(self) wself = self;
+    // 赋值组合任务WebCombineOperation中的查找缓存NSOperation任务
+    operation.cacheOperation = [[WebCacheHelper sharedWebCache] queryDataFromMemory:key cacheQueryCompletedBlock:^(id data, BOOL hasCache) {
+        // 判断是否查找到缓存
+        if (hasCache) {
+            // 查找到则直接返回缓存数据
+            if (completedBlock) {
+                completedBlock(data, nil, YES);
+            }
+        } else {
+            // 未查找到则创建下载网络资源的WebDownloadOperation任务，并赋值组合任务WebCombineOperation
+            operation.downloadOperation = [[WebDownloadOperation alloc] initWithRequest:request responseBlock:^(NSHTTPURLResponse *response) {
+                if (responseBlock) {
+                    responseBlock(response);
+                }
+            } progressBlock:progressBlock completedBlock:^(NSData *data, NSError *error, BOOL finished) {
+                // 网络资源下载完毕， 处理返回数据
+                if (completedBlock) {
+                    if (finished && !error) {
+                        // 若下载任务没有错误的情况下完成，则将下载数据进行缓存
+                        [[WebCacheHelper sharedWebCache] storeDataChace:data forKey:key];
+                        // 任务完成回调
+                        completedBlock(data, nil, YES);
+                    } else {
+                        // 任务失败回调
+                        completedBlock(data, error, NO);
+                    }
+                }
+            } cancelBlock:^{
+                // 任务取消回调
+                if (cancelBlock) {
+                    cancelBlock();
+                }
+            }];
+            // 将下载任务添加进队列
+            if (isBackground) {
+                [wself.downloadBackgroundQueue addOperation:operation.downloadOperation];
+            } else {
+                // 添加高优先级下载任务，队列中每次只执行1个任务
+                [wself.downloadPriorityHighQueue cancelAllOperations];
+                [wself.downloadPriorityHighQueue addOperation:operation.downloadOperation];
+            }
+        }
+    }];
+    // 返回包含了查询任务和下载任务的组合任务
+    return operation;
+}
+
+#pragma mark - 更新当前正在执行的队列,保证downloadPriorityHighQueue执行任务时downloadBackgroundQueue暂停
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"operations"]) {
+        @synchronized (self) {
+            if ([_downloadPriorityHighQueue.operations count] == 0) {
+                [_downloadBackgroundQueue setSuspended:NO];
+            } else {
+                [_downloadBackgroundQueue setSuspended:YES];
+            }
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+- (void)dealloc{
+    [_downloadPriorityHighQueue removeObserver:self forKeyPath:@"operations"];
+}
+
+@end
