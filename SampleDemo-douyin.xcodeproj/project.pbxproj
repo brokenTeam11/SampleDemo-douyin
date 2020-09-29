@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C3416D83251C0FF700D5A30C /* UIWindow+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C3416D82251C0FF700D5A30C /* UIWindow+Extension.m */; };
+		C34358BA252380ED00515F89 /* WebPImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C34358B9252380ED00515F89 /* WebPImage.m */; };
 		C34551F22512739300F2C7F2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C34551F12512739300F2C7F2 /* AppDelegate.m */; };
 		C34551F52512739300F2C7F2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C34551F42512739300F2C7F2 /* SceneDelegate.m */; };
 		C34551F82512739300F2C7F2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34551F72512739300F2C7F2 /* ViewController.m */; };
@@ -63,6 +64,8 @@
 		8B8A1824CEA46569F0F1778B /* Pods-SampleDemo-douyin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleDemo-douyin.release.xcconfig"; path = "Target Support Files/Pods-SampleDemo-douyin/Pods-SampleDemo-douyin.release.xcconfig"; sourceTree = "<group>"; };
 		C3416D81251C0FF700D5A30C /* UIWindow+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Extension.h"; sourceTree = "<group>"; };
 		C3416D82251C0FF700D5A30C /* UIWindow+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Extension.m"; sourceTree = "<group>"; };
+		C34358B8252380ED00515F89 /* WebPImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebPImage.h; sourceTree = "<group>"; };
+		C34358B9252380ED00515F89 /* WebPImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebPImage.m; sourceTree = "<group>"; };
 		C34551ED2512739300F2C7F2 /* SampleDemo-douyin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SampleDemo-douyin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C34551F02512739300F2C7F2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C34551F12512739300F2C7F2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -192,6 +195,15 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		C34358B7252380B800515F89 /* WebP */ = {
+			isa = PBXGroup;
+			children = (
+				C34358B8252380ED00515F89 /* WebPImage.h */,
+				C34358B9252380ED00515F89 /* WebPImage.m */,
+			);
+			path = WebP;
+			sourceTree = "<group>";
+		};
 		C34551E42512739300F2C7F2 = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +225,7 @@
 		C34551EF2512739300F2C7F2 /* SampleDemo-douyin */ = {
 			isa = PBXGroup;
 			children = (
+				C34358B7252380B800515F89 /* WebP */,
 				C3416D80251C0E7100D5A30C /* Category */,
 				C35644442513E1CB007221A6 /* Entity */,
 				C345521825128E4600F2C7F2 /* Network */,
@@ -481,6 +494,7 @@
 				C34552292512905300F2C7F2 /* VisitorRequest.m in Sources */,
 				C345522025128F1B00F2C7F2 /* WebSocketManager.m in Sources */,
 				C38DD414251BB848001C8988 /* AwemeListResponse.m in Sources */,
+				C34358BA252380ED00515F89 /* WebPImage.m in Sources */,
 				C38DD402251BAF33001C8988 /* UserResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
